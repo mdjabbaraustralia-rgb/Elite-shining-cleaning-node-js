@@ -1,0 +1,44 @@
+<%- include('partials/header', { title: 'Customer Reviews — Elite Shining Cleaning Australia' }) %>
+
+<section class="bg-gradient-to-br from-brand-800 to-brand-950 text-white py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm font-medium">Testimonials</span>
+        <h1 class="mt-5 font-display font-extrabold text-4xl sm:text-5xl">Loved Across the Hunter Region</h1>
+        <p class="mt-5 text-brand-100 max-w-2xl mx-auto">Don't just take our word for it — here's what real customers say about their Elite Shining Cleaning experience.</p>
+        <div class="mt-6 inline-flex items-center gap-2 text-gold-400 text-lg">★★★★★ <span class="text-white text-sm">4.9 out of 5 — 2,300+ reviews</span></div>
+    </div>
+</section>
+
+<section class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% testimonials.forEach(function (t, i) { %>
+                <div class="reveal reveal-<%= (i % 3) + 1 %> relative hover-lift bg-white rounded-3xl p-8 shadow-card border border-slate-100 hover:shadow-soft transition-shadow duration-300">
+                    <span class="absolute top-4 right-6 text-6xl font-display text-brand-50 select-none leading-none">"</span>
+                    <div class="relative text-gold-500 mb-4"><%= '★'.repeat(t.rating) %></div>
+                    <p class="relative text-slate-600 text-sm leading-relaxed">"<%= t.quote %>"</p>
+                    <div class="relative mt-6 flex items-center gap-3">
+                        <% if (t.photo) { %>
+                            <img src="<%= asset(t.photo) %>" alt="<%= t.name %>" class="w-10 h-10 rounded-full object-cover flex-shrink-0" loading="lazy">
+                        <% } else { %>
+                            <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center flex-shrink-0"><%= t.name.substring(0,1) %></div>
+                        <% } %>
+                        <div>
+                            <p class="font-semibold text-slate-900 text-sm"><%= t.name %></p>
+                            <p class="text-xs text-slate-400"><%= t.location %></p>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-gradient-to-r from-brand-600 to-brand-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <h2 class="font-display font-extrabold text-3xl">Ready to join our happy customers?</h2>
+        <a href="/contact" class="btn-glow mt-8 inline-flex items-center gap-2 rounded-full bg-gold-400 hover:bg-gold-500 px-8 py-4 text-brand-950 font-bold shadow-soft hover:-translate-y-0.5 hover:shadow-xl transition-all">Get Your Free Quote →</a>
+    </div>
+</section>
+
+<%- include('partials/footer', { footerServices: footerServices }) %>

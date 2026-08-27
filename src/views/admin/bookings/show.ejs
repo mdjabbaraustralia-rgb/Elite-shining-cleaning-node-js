@@ -1,0 +1,81 @@
+<%- include('../partials/header', { title: 'Quote Request', pageTitle: 'Quote Request #' + booking.id }) %>
+    <a href="/admin/bookings" class="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-brand-600 mb-6">← Back to all quotes</a>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-card p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="font-display font-bold text-xl text-slate-900"><%= booking.name %></h2>
+                <span class="text-xs font-semibold px-3 py-1.5 rounded-full
+                    <%= booking.status === 'new' ? 'bg-gold-400/20 text-gold-500' : (booking.status === 'contacted' ? 'bg-brand-100 text-brand-700' : 'bg-slate-100 text-slate-500') %>">
+                    <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
+                </span>
+            </div>
+
+            <dl class="grid sm:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <dt class="text-slate-400">Phone</dt>
+                    <dd class="font-semibold text-slate-900 mt-0.5"><a href="tel:<%= booking.phone %>" class="hover:text-brand-600"><%= booking.phone %></a></dd>
+                </div>
+                <div>
+                    <dt class="text-slate-400">Email</dt>
+                    <dd class="font-semibold text-slate-900 mt-0.5"><a href="mailto:<%= booking.email %>" class="hover:text-brand-600"><%= booking.email %></a></dd>
+                </div>
+                <div>
+                    <dt class="text-slate-400">Suburb</dt>
+                    <dd class="font-semibold text-slate-900 mt-0.5"><%= booking.suburb %></dd>
+                </div>
+                <div>
+                    <dt class="text-slate-400">Service Needed</dt>
+                    <dd class="font-semibold text-slate-900 mt-0.5"><%= booking.service_type %></dd>
+                </div>
+                <div>
+                    <dt class="text-slate-400">Property Size</dt>
+                    <dd class="font-semibold text-slate-900 mt-0.5"><%= booking.property_size || '—' %></dd>
+                </div>
+                <div>
+                    <dt class="text-slate-400">Preferred Date</dt>
+                    <dd class="font-semibold text-slate-900 mt-0.5"><%= booking.preferred_date ? formatDate(booking.preferred_date) : '—' %></dd>
+                </div>
+                <div>
+                    <dt class="text-slate-400">Submitted</dt>
+                    <dd class="font-semibold text-slate-900 mt-0.5"><%= formatDate(booking.created_at) %></dd>
+                </div>
+            </dl>
+
+            <% if (booking.message) { %>
+                <div class="mt-6 pt-6 border-t border-slate-100">
+                    <dt class="text-slate-400 text-sm mb-1">Additional Details</dt>
+                    <p class="text-slate-700 leading-relaxed"><%= booking.message %></p>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="space-y-6">
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
+                <h3 class="font-display font-bold text-slate-900 mb-4">Update Status</h3>
+                <form method="POST" action="/admin/bookings/<%= booking.id %>/status" class="space-y-3">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <select name="status" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm text-sm">
+                        <option value="new" <%= booking.status === 'new' ? 'selected' : '' %>>New</option>
+                        <option value="contacted" <%= booking.status === 'contacted' ? 'selected' : '' %>>Contacted</option>
+                        <option value="completed" <%= booking.status === 'completed' ? 'selected' : '' %>>Completed</option>
+                    </select>
+                    <button type="submit" class="w-full rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 transition">Save Status</button>
+                </form>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
+                <h3 class="font-display font-bold text-slate-900 mb-4">Quick Actions</h3>
+                <div class="space-y-2">
+                    <a href="/admin/quotations/create?booking_id=<%= booking.id %>" class="block w-full text-center rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 transition">📄 Create Quotation</a>
+                    <a href="tel:<%= booking.phone %>" class="block w-full text-center rounded-xl bg-gold-400 hover:bg-gold-500 text-brand-950 text-sm font-bold px-5 py-2.5 transition">📞 Call Customer</a>
+                    <a href="mailto:<%= booking.email %>" class="block w-full text-center rounded-xl border border-slate-200 hover:bg-slate-50 text-sm font-semibold px-5 py-2.5 transition">✉️ Email Customer</a>
+                    <form method="POST" action="/admin/bookings/<%= booking.id %>" onsubmit="return confirm('Delete this quote request permanently?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="w-full text-center rounded-xl border border-red-200 text-red-600 hover:bg-red-50 text-sm font-semibold px-5 py-2.5 transition">🗑️ Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../partials/footer') %>

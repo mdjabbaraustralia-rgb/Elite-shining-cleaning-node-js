@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — Elite Shining Cleaning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<%= asset('css/app.css') %>?v=<%= assetVersion %>">
+</head>
+<body class="font-sans bg-gradient-to-br from-brand-800 to-brand-950 min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-md">
+        <div class="text-center mb-8">
+            <img src="<%= asset('images/logo.png') %>" alt="Elite Shining Cleaning" class="h-10 mx-auto bg-white rounded-xl px-3 py-2 inline-block">
+        </div>
+        <div class="bg-white rounded-3xl shadow-soft p-8">
+            <h1 class="font-display font-bold text-xl text-slate-900 mb-1">Admin Login</h1>
+            <p class="text-sm text-slate-500 mb-6">Sign in to manage quotes and site settings.</p>
+
+            <% if (error) { %>
+                <div class="mb-5 rounded-xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form method="POST" action="/admin/login" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Username</label>
+                    <input type="text" name="name" value="<%= old.name || '' %>" required autofocus
+                        class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Password</label>
+                    <input type="password" name="password" required
+                        class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <label class="flex items-center gap-2 text-sm text-slate-500">
+                    <input type="checkbox" name="remember" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500">
+                    Remember me
+                </label>
+                <button type="submit" class="w-full rounded-full bg-gradient-to-r from-brand-500 to-brand-700 px-6 py-3 text-white font-bold shadow-soft hover:shadow-lg transition">
+                    Log In
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

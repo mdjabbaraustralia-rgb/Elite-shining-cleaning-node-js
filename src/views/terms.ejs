@@ -1,0 +1,54 @@
+<%- include('partials/header', { title: 'Terms & Conditions — Elite Shining Cleaning Australia' }) %>
+
+<section class="bg-gradient-to-br from-brand-800 to-brand-950 text-white py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm font-medium">Legal</span>
+        <h1 class="mt-5 font-display font-extrabold text-4xl sm:text-5xl">Terms &amp; Conditions</h1>
+        <p class="mt-4 text-brand-100">Last updated: <%= new Date().toLocaleDateString('en-AU', { day: '2-digit', month: 'long', year: 'numeric' }) %></p>
+    </div>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-slate">
+        <div class="space-y-10 text-slate-600 leading-relaxed">
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">1. Acceptance of Terms</h2>
+                <p>By requesting a quote or booking a service with <%= setting('business_name', 'Elite Shining Cleaning') %> ("we", "us"), you agree to these Terms &amp; Conditions. Please read them carefully before booking.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">2. Bookings &amp; Quotes</h2>
+                <p>Quotes provided online or by phone are estimates based on the information you provide. Final pricing is confirmed after we understand the full scope of the property and service required. Bookings are confirmed once a time and date are agreed with our team.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">3. Cancellations &amp; Rescheduling</h2>
+                <p>We ask for at least 24 hours' notice to cancel or reschedule a booking. Late cancellations or lock-outs on the day may incur a call-out fee to cover our cleaner's reserved time.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">4. Satisfaction Guarantee</h2>
+                <p>If you're not fully satisfied with your clean, let us know within 24 hours and we will re-clean the affected areas free of charge. For End of Lease bookings, this includes a re-clean if your property manager identifies a genuine cleanliness issue against the standard checklist.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">5. Access &amp; Safety</h2>
+                <p>You agree to provide safe and reasonable access to the property at the booked time. Our team is fully insured and police-checked; please advise us in advance of any pets, alarms, or access instructions.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">6. Liability</h2>
+                <p>We carry public liability insurance for our cleaning services. Any damage claims must be reported within 24 hours of the service being completed so we can investigate and resolve the matter promptly.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">7. Payment</h2>
+                <p>Payment is due on completion of the service unless otherwise agreed in writing. We accept standard payment methods advised at the time of booking.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">8. Governing Law</h2>
+                <p>These terms are governed by the laws of New South Wales, Australia.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">9. Contact Us</h2>
+                <p>Questions about these terms? Contact us at <a href="mailto:<%= setting('email', 'hello@eliteshiningcleaning.com.au') %>" class="text-brand-600 font-semibold hover:underline"><%= setting('email', 'hello@eliteshiningcleaning.com.au') %></a> or call <%= setting('phone', '1300 123 456') %>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer', { footerServices: footerServices }) %>

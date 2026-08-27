@@ -1,0 +1,70 @@
+<%- include('../partials/header', { title: 'Quote Requests', pageTitle: 'Quote Requests' }) %>
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-100">
+            <form method="GET" class="flex flex-wrap items-center gap-3">
+                <input type="text" name="q" value="<%= query.q || '' %>" placeholder="Search name, email, phone, suburb..."
+                    class="flex-1 min-w-[200px] rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm text-sm">
+                <select name="status" class="rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm text-sm">
+                    <option value="">All Statuses</option>
+                    <option value="new" <%= query.status === 'new' ? 'selected' : '' %>>New</option>
+                    <option value="contacted" <%= query.status === 'contacted' ? 'selected' : '' %>>Contacted</option>
+                    <option value="completed" <%= query.status === 'completed' ? 'selected' : '' %>>Completed</option>
+                </select>
+                <div class="flex items-center gap-2 text-sm text-slate-400">
+                    <input type="date" name="date_from" value="<%= query.date_from || '' %>"
+                        class="rounded-none border-slate-200 px-3 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm text-sm">
+                    <span>to</span>
+                    <input type="date" name="date_to" value="<%= query.date_to || '' %>"
+                        class="rounded-none border-slate-200 px-3 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm text-sm">
+                </div>
+                <button type="submit" class="rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 transition">Filter</button>
+                <% if (query.q || query.status || query.date_from || query.date_to) { %>
+                    <a href="/admin/bookings" class="text-sm text-slate-400 hover:text-slate-600">Clear</a>
+                <% } %>
+            </form>
+        </div>
+        <div class="overflow-x-auto">
+        <table class="w-full text-sm min-w-[820px]">
+            <thead class="bg-slate-50 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-medium">Name</th>
+                    <th class="px-6 py-3 font-medium">Contact</th>
+                    <th class="px-6 py-3 font-medium">Service</th>
+                    <th class="px-6 py-3 font-medium">Suburb</th>
+                    <th class="px-6 py-3 font-medium">Status</th>
+                    <th class="px-6 py-3 font-medium">Received</th>
+                    <th class="px-6 py-3"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <% if (bookings.length === 0) { %>
+                    <tr><td colspan="7" class="px-6 py-10 text-center text-slate-400">No quote requests found.</td></tr>
+                <% } %>
+                <% bookings.forEach(function (booking) { %>
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-6 py-4 font-semibold text-slate-900">
+                            <a href="/admin/bookings/<%= booking.id %>" class="hover:text-brand-600"><%= booking.name %></a>
+                        </td>
+                        <td class="px-6 py-4 text-slate-500">
+                            <div><%= booking.phone %></div>
+                            <div class="text-xs"><%= booking.email %></div>
+                        </td>
+                        <td class="px-6 py-4"><%= booking.service_type %></td>
+                        <td class="px-6 py-4"><%= booking.suburb %></td>
+                        <td class="px-6 py-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full
+                                <%= booking.status === 'new' ? 'bg-gold-400/20 text-gold-500' : (booking.status === 'contacted' ? 'bg-brand-100 text-brand-700' : 'bg-slate-100 text-slate-500') %>">
+                                <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-slate-400"><%= formatDate(booking.created_at) %></td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="/admin/bookings/<%= booking.id %>" class="text-brand-600 hover:underline font-semibold">View →</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        </div>
+    </div>
+<%- include('../partials/footer') %>

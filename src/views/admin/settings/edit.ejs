@@ -1,0 +1,232 @@
+<%- include('../partials/header', { title: 'Site Settings', pageTitle: 'Site Settings' }) %>
+    <form method="POST" action="/admin/settings" enctype="multipart/form-data" class="space-y-6 max-w-4xl">
+
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-8">
+            <h2 class="font-display font-bold text-lg text-slate-900 mb-1">Site Logo</h2>
+            <p class="text-sm text-slate-500 mb-6">Update the logo shown in the header and the footer. Leave blank to keep the current one.</p>
+
+            <div class="grid sm:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Header Logo</label>
+                    <div class="rounded-xl border border-slate-100 bg-white p-4 flex items-center justify-center h-24">
+                        <img src="<%= setting('site_logo') || asset('images/logo.png') %>" alt="Header logo" class="h-14 w-auto object-contain">
+                    </div>
+                    <input type="file" name="site_logo" accept="image/*" class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-brand-50 file:text-brand-700 file:px-4 file:py-2 file:font-semibold hover:file:bg-brand-100">
+                    <p class="text-xs text-slate-400 mt-1">PNG with transparent background recommended, max 2MB.</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Footer Logo (white version)</label>
+                    <div class="rounded-xl border border-slate-100 bg-brand-950 p-4 flex items-center justify-center h-24">
+                        <img src="<%= setting('site_logo_white') || asset('images/logo-white.png') %>" alt="Footer logo" class="h-10 w-auto object-contain">
+                    </div>
+                    <input type="file" name="site_logo_white" accept="image/*" class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-brand-50 file:text-brand-700 file:px-4 file:py-2 file:font-semibold hover:file:bg-brand-100">
+                    <p class="text-xs text-slate-400 mt-1">Use a white/light version — the footer background is dark. Max 2MB.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-8">
+            <h2 class="font-display font-bold text-lg text-slate-900 mb-1">Homepage Banner</h2>
+            <p class="text-sm text-slate-500 mb-6">Update the hero image and headline shown at the top of the homepage.</p>
+
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Current Banner Image</label>
+                <img src="<%= setting('banner_image') || asset('images/hero-cleaning.jpg') %>" alt="Current banner" class="w-full max-w-md rounded-xl border border-slate-100 object-cover aspect-video">
+                <input type="file" name="banner_image" accept="image/*" class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-brand-50 file:text-brand-700 file:px-4 file:py-2 file:font-semibold hover:file:bg-brand-100">
+                <p class="text-xs text-slate-400 mt-1">JPG or PNG, max 5MB. Leave blank to keep the current image.</p>
+            </div>
+
+            <div x-data="{
+                    lines: <%- JSON.stringify(heroHeadlines) %>,
+                    addLine() { this.lines.push({ words: [{ text: '', color: '#ffffff', underline: false }] }) },
+                    removeLine(i) { if (this.lines.length > 1) this.lines.splice(i, 1) },
+                    addWord(i) { this.lines[i].words.push({ text: '', color: '#ffffff', underline: false }) },
+                    removeWord(i, j) { if (this.lines[i].words.length > 1) this.lines[i].words.splice(j, 1) }
+                }">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Headline</label>
+                <p class="text-xs text-slate-400 mb-3">Each line can have multiple words, and each word can have its own color and underline — add lines or words as needed.</p>
+
+                <div class="space-y-4">
+                    <template x-for="(line, i) in lines" :key="i">
+                        <div class="bg-slate-50 border border-slate-100 px-4 py-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-slate-400" x-text="'Line ' + (i + 1)"></span>
+                                <button type="button" @click="removeLine(i)" class="text-red-400 hover:text-red-600 text-sm font-bold" title="Delete this line">✕ Delete line</button>
+                            </div>
+                            <div class="space-y-2">
+                                <template x-for="(word, j) in line.words" :key="j">
+                                    <div class="flex flex-wrap items-center gap-3 bg-white border border-slate-100 px-3 py-2">
+                                        <input type="text" :name="'headline_word_text[' + i + '][' + j + ']'" x-model="word.text" placeholder="Word or phrase"
+                                            class="flex-1 min-w-[140px] rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                                        <label class="inline-flex items-center gap-2 cursor-pointer select-none">
+                                            <input type="color" :name="'headline_word_color[' + i + '][' + j + ']'" x-model="word.color" class="w-7 h-7 p-0 border border-slate-200 rounded-none cursor-pointer flex-shrink-0">
+                                            <span class="text-sm text-slate-600">Color</span>
+                                        </label>
+                                        <label class="inline-flex items-center gap-2 cursor-pointer select-none">
+                                            <input type="checkbox" :name="'headline_word_underline[' + i + '_' + j + ']'" value="1" x-model="word.underline"
+                                                class="rounded border-slate-300 text-brand-600 focus:ring-brand-500">
+                                            <span class="text-sm text-slate-600">Underline</span>
+                                        </label>
+                                        <button type="button" @click="removeWord(i, j)" class="ml-auto text-red-400 hover:text-red-600 text-sm font-bold" title="Delete this word">✕</button>
+                                    </div>
+                                </template>
+                            </div>
+                            <button type="button" @click="addWord(i)" class="mt-2 text-xs font-semibold text-brand-600 hover:underline">+ Add word</button>
+                        </div>
+                    </template>
+                </div>
+
+                <button type="button" @click="addLine()" class="mt-3 text-sm font-semibold text-brand-600 hover:underline">+ Add line</button>
+            </div>
+
+            <div class="mt-4">
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Subtitle</label>
+                <textarea name="hero_subtitle" rows="2" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm"><%= oldOr('hero_subtitle', settings.hero_subtitle || 'Premium residential & commercial cleaning across Newcastle and the Hunter Region — within a 50km radius. Fully insured, background-checked cleaners with a 100% satisfaction guarantee.') %></textarea>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-8">
+            <h2 class="font-display font-bold text-lg text-slate-900 mb-1">Service Area Section</h2>
+            <p class="text-sm text-slate-500 mb-6">Update the "Real cleans. Real results." image shown in the Service Area section of the homepage.</p>
+
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Current Image</label>
+                <img src="<%= setting('service_area_image') || asset('images/service-area-clean.jpg') %>" alt="Current service area image" class="w-full max-w-md rounded-xl border border-slate-100 object-cover aspect-video">
+                <input type="file" name="service_area_image" accept="image/*" class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-brand-50 file:text-brand-700 file:px-4 file:py-2 file:font-semibold hover:file:bg-brand-100">
+                <p class="text-xs text-slate-400 mt-1">JPG or PNG, max 5MB. Leave blank to keep the current image.</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-8">
+            <h2 class="font-display font-bold text-lg text-slate-900 mb-1">About Page</h2>
+            <p class="text-sm text-slate-500 mb-6">Content shown on the About Us page.</p>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Page Title</label>
+                    <input type="text" name="about_title" value="<%= oldOr('about_title', settings.about_title || 'A local team, obsessed with clean') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Story Heading</label>
+                    <input type="text" name="about_story_heading" value="<%= oldOr('about_story_heading', settings.about_story_heading || 'From one home, to thousands') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Page Subtitle</label>
+                <textarea name="about_subtitle" rows="2" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm"><%= oldOr('about_subtitle', settings.about_subtitle || 'Founded in Newcastle, Elite Shining Cleaning has grown into a trusted name across the Hunter Region — built on reliability, respect and real results.') %></textarea>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Story Paragraph 1</label>
+                <textarea name="about_story_para1" rows="3" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm"><%= oldOr('about_story_para1', settings.about_story_para1 || "Elite Shining Cleaning started in 2016 with a single cleaner and a simple promise: treat every home like it's our own. Today, our vetted team of 80+ professionals serve homes and businesses across Newcastle, Lake Macquarie, Maitland and the greater Hunter Region — within a 50km radius — without ever losing that personal touch.") %></textarea>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Story Paragraph 2</label>
+                <textarea name="about_story_para2" rows="2" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm"><%= oldOr('about_story_para2', settings.about_story_para2 || "We're proud to be a fully Australian-owned company, reinvesting in our local cleaning teams and communities.") %></textarea>
+            </div>
+
+            <div class="mt-6">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Team Photo</label>
+                <img src="<%= setting('about_team_photo') || asset('images/team-photo.jpg') %>" alt="Current team photo" class="w-full max-w-md rounded-xl border border-slate-100 object-cover aspect-video">
+                <input type="file" name="about_team_photo" accept="image/*" class="mt-3 block w-full text-sm text-slate-500 file:mr-4 file:rounded-full file:border-0 file:bg-brand-50 file:text-brand-700 file:px-4 file:py-2 file:font-semibold hover:file:bg-brand-100">
+                <p class="text-xs text-slate-400 mt-1">JPG or PNG, max 5MB. Leave blank to keep the current photo.</p>
+            </div>
+
+            <div class="mt-6">
+                <label class="block text-sm font-semibold text-slate-700 mb-3">Stats Row</label>
+                <div class="grid sm:grid-cols-4 gap-4">
+                    <% [['1','9','Years in Business'],['2','80+','Vetted Cleaners'],['3','50km','Service Radius'],['4','12k+','Happy Customers']].forEach(function (row) { %>
+                        <div class="space-y-2">
+                            <input type="text" name="about_stat_<%= row[0] %>_num" value="<%= oldOr('about_stat_' + row[0] + '_num', settings['about_stat_' + row[0] + '_num'] || row[1]) %>" placeholder="Number" class="w-full rounded-none border-slate-200 px-3 py-2 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm text-sm font-bold">
+                            <input type="text" name="about_stat_<%= row[0] %>_label" value="<%= oldOr('about_stat_' + row[0] + '_label', settings['about_stat_' + row[0] + '_label'] || row[2]) %>" placeholder="Label" class="w-full rounded-none border-slate-200 px-3 py-2 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm text-xs">
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-8">
+            <h2 class="font-display font-bold text-lg text-slate-900 mb-1">Contact Information</h2>
+            <p class="text-sm text-slate-500 mb-6">Shown in the header, footer and contact page across the site.</p>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Business Name</label>
+                    <input type="text" name="business_name" value="<%= oldOr('business_name', settings.business_name || 'Elite Shining Cleaning') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Phone Number</label>
+                    <input type="text" name="phone" value="<%= oldOr('phone', settings.phone || '1300 123 456') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Email Address</label>
+                    <input type="email" name="email" value="<%= oldOr('email', settings.email || 'hello@eliteshiningcleaning.com.au') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">ABN</label>
+                    <input type="text" name="abn" value="<%= oldOr('abn', settings.abn || '12 345 678 901') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Address</label>
+                    <input type="text" name="address" value="<%= oldOr('address', settings.address || 'Level 2, 88 Hunter St, Newcastle NSW 2300') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Business Hours</label>
+                    <input type="text" name="business_hours" value="<%= oldOr('business_hours', settings.business_hours || 'Mon–Sun: 7:00am – 8:00pm') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Top Bar Announcement</label>
+                    <input type="text" name="announcement_text" value="<%= oldOr('announcement_text', settings.announcement_text || 'Servicing Newcastle & the Hunter Region (50km radius) — 7 days a week') %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-8">
+            <h2 class="font-display font-bold text-lg text-slate-900 mb-1">Social Media</h2>
+            <p class="text-sm text-slate-500 mb-6">Links used by the icons in the footer. Use the switch to turn an icon on/off without losing the saved link.</p>
+
+            <div class="grid sm:grid-cols-3 gap-4">
+                <% [
+                    ['facebook', 'Facebook URL', 'https://facebook.com/...'],
+                    ['instagram', 'Instagram URL', 'https://instagram.com/...'],
+                    ['linkedin', 'LinkedIn URL', 'https://linkedin.com/...'],
+                    ['youtube', 'YouTube URL', 'https://youtube.com/@... (optional)'],
+                    ['tiktok', 'TikTok URL', 'https://tiktok.com/@... (optional)'],
+                    ['twitter', 'X / Twitter URL', 'https://x.com/... (optional)'],
+                ].forEach(function (row) { %>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-sm font-semibold text-slate-700"><%= row[1] %></label>
+                            <label class="inline-flex items-center gap-1.5 cursor-pointer select-none">
+                                <input type="checkbox" name="<%= row[0] %>_enabled" value="1"
+                                    <%= oldOr(row[0] + '_enabled', (settings[row[0] + '_enabled'] || '1') !== '0') ? 'checked' : '' %>
+                                    class="rounded border-slate-300 text-brand-600 focus:ring-brand-500">
+                                <span class="text-xs text-slate-400">Show</span>
+                            </label>
+                        </div>
+                        <input type="url" name="<%= row[0] %>_url" value="<%= oldOr(row[0] + '_url', settings[row[0] + '_url'] || '') %>" placeholder="<%= row[2] %>" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm">
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-8">
+            <h2 class="font-display font-bold text-lg text-slate-900 mb-1">Footer Content</h2>
+            <p class="text-sm text-slate-500 mb-6">The tagline and service area list shown in the site footer.</p>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Footer Tagline</label>
+                <textarea name="footer_tagline" rows="2" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm"><%= oldOr('footer_tagline', settings.footer_tagline || 'Premium residential & commercial cleaning across Australia. Insured, police-checked, and 100% satisfaction guaranteed.') %></textarea>
+            </div>
+
+            <div class="mt-4">
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Service Areas (one per line)</label>
+                <textarea name="footer_service_areas" rows="6" class="w-full rounded-none border-slate-200 px-4 py-2.5 leading-normal focus:outline-none focus:border-slate-200 focus:ring-0 shadow-sm"><%= oldOr('footer_service_areas', settings.footer_service_areas || "Newcastle, NSW\nLake Macquarie, NSW\nMaitland, NSW\nPort Stephens, NSW\nCessnock, NSW\n+ 50km radius") %></textarea>
+                <p class="mt-1 text-xs text-slate-400">Add or remove lines to add/remove areas shown in the footer.</p>
+            </div>
+        </div>
+
+        <button type="submit" class="rounded-full bg-gradient-to-r from-brand-500 to-brand-700 px-8 py-3.5 text-white font-bold shadow-soft hover:shadow-lg transition">
+            Save All Settings
+        </button>
+    </form>
+<%- include('../partials/footer') %>

@@ -1,0 +1,57 @@
+<%- include('partials/header', { title: 'Dashboard', pageTitle: 'Dashboard' }) %>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <% [
+            ['Total Quotes', stats.total, 'brand'],
+            ['New', stats.new, 'gold'],
+            ['Contacted', stats.contacted, 'brand'],
+            ['Completed', stats.completed, 'brand'],
+        ].forEach(function (row) { %>
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-6">
+                <p class="text-3xl font-display font-extrabold <%= row[2] === 'gold' ? 'text-gold-500' : 'text-brand-700' %>"><%= row[1] %></p>
+                <p class="text-sm text-slate-500 mt-1"><%= row[0] %></p>
+            </div>
+        <% }) %>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+            <h2 class="font-display font-bold text-slate-900">Recent Quote Requests</h2>
+            <a href="/admin/bookings" class="text-sm text-brand-600 font-semibold hover:underline">View all →</a>
+        </div>
+        <div class="overflow-x-auto">
+        <table class="w-full text-sm min-w-[640px]">
+            <thead class="bg-slate-50 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-medium">Name</th>
+                    <th class="px-6 py-3 font-medium">Service</th>
+                    <th class="px-6 py-3 font-medium">Suburb</th>
+                    <th class="px-6 py-3 font-medium">Status</th>
+                    <th class="px-6 py-3 font-medium">Received</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <% if (recent.length === 0) { %>
+                    <tr>
+                        <td colspan="5" class="px-6 py-10 text-center text-slate-400">No quote requests yet.</td>
+                    </tr>
+                <% } %>
+                <% recent.forEach(function (booking) { %>
+                    <tr class="hover:bg-slate-50 cursor-pointer" onclick="window.location='/admin/bookings/<%= booking.id %>'">
+                        <td class="px-6 py-4 font-semibold text-slate-900"><%= booking.name %></td>
+                        <td class="px-6 py-4"><%= booking.service_type %></td>
+                        <td class="px-6 py-4"><%= booking.suburb %></td>
+                        <td class="px-6 py-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full
+                                <%= booking.status === 'new' ? 'bg-gold-400/20 text-gold-500' : (booking.status === 'contacted' ? 'bg-brand-100 text-brand-700' : 'bg-slate-100 text-slate-500') %>">
+                                <%= booking.status.charAt(0).toUpperCase() + booking.status.slice(1) %>
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-slate-400"><%= timeAgo(booking.created_at) %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        </div>
+    </div>
+<%- include('partials/footer') %>

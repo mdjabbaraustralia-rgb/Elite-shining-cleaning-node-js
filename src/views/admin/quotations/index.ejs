@@ -1,0 +1,49 @@
+<%- include('../partials/header', { title: 'Quotations', pageTitle: 'Quotations' }) %>
+    <div class="mb-6 flex justify-end">
+        <a href="/admin/quotations/create" class="rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 transition">+ New Quotation</a>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden">
+        <div class="overflow-x-auto">
+        <table class="w-full text-sm min-w-[800px]">
+            <thead class="bg-slate-50 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-medium">Quote #</th>
+                    <th class="px-6 py-3 font-medium">Client</th>
+                    <th class="px-6 py-3 font-medium">Service</th>
+                    <th class="px-6 py-3 font-medium">Total</th>
+                    <th class="px-6 py-3 font-medium">Valid Until</th>
+                    <th class="px-6 py-3 font-medium">Created</th>
+                    <th class="px-6 py-3"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <% if (quotations.length === 0) { %>
+                    <tr><td colspan="7" class="px-6 py-10 text-center text-slate-400">No quotations created yet.</td></tr>
+                <% } %>
+                <% quotations.forEach(function (q) { %>
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-6 py-4 font-semibold text-slate-900"><%= q.quote_number %></td>
+                        <td class="px-6 py-4">
+                            <div class="font-medium text-slate-800"><%= q.client_name %></div>
+                            <div class="text-xs text-slate-400"><%= q.client_email %></div>
+                        </td>
+                        <td class="px-6 py-4 text-slate-500"><%= q.service_type %></td>
+                        <td class="px-6 py-4 font-semibold text-brand-700">$<%= q.total.toFixed(2) %></td>
+                        <td class="px-6 py-4 text-slate-400"><%= q.valid_until ? formatDate(q.valid_until) : '—' %></td>
+                        <td class="px-6 py-4 text-slate-400"><%= formatDate(q.created_at) %></td>
+                        <td class="px-6 py-4 text-right space-x-3 whitespace-nowrap">
+                            <a href="/admin/quotations/<%= q.id %>/pdf" target="_blank" class="text-brand-600 hover:underline font-semibold">View PDF</a>
+                            <a href="/admin/quotations/<%= q.id %>/download" class="text-brand-600 hover:underline font-semibold">Download</a>
+                            <form method="POST" action="/admin/quotations/<%= q.id %>" class="inline" onsubmit="return confirm('Delete this quotation?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="text-red-500 hover:underline font-semibold">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        </div>
+    </div>
+<%- include('../partials/footer') %>

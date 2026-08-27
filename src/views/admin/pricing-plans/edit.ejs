@@ -1,0 +1,8 @@
+<%- include('../partials/header', { title: 'Edit Pricing Plan', pageTitle: 'Edit Pricing Plan' }) %>
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-6 sm:p-8 max-w-2xl">
+        <form method="POST" action="/admin/pricing-plans/<%= plan.id %>">
+            <input type="hidden" name="_method" value="PUT">
+            <%- include('_form', { plan: plan }) %>
+        </form>
+    </div>
+<%- include('../partials/footer') %>

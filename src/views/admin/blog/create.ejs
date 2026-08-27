@@ -1,0 +1,7 @@
+<%- include('../partials/header', { title: 'Add Blog Post', pageTitle: 'Add Blog Post' }) %>
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-6 sm:p-8 max-w-2xl">
+        <form method="POST" action="/admin/blog" enctype="multipart/form-data">
+            <%- include('_form', { post: null }) %>
+        </form>
+    </div>
+<%- include('../partials/footer') %>

@@ -1,0 +1,33 @@
+<%- include('partials/header', { title: 'Gallery — Elite Shining Cleaning Australia' }) %>
+
+<section class="bg-gradient-to-br from-brand-800 to-brand-950 text-white py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm font-medium">Gallery</span>
+        <h1 class="mt-5 font-display font-extrabold text-4xl sm:text-5xl">See the Sparkle for Yourself</h1>
+        <p class="mt-5 text-brand-100 max-w-2xl mx-auto">A glimpse of the transformations our team delivers every day across Australia.</p>
+    </div>
+</section>
+
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% images.forEach(function (image, i) { %>
+            <div class="reveal reveal-<%= (i % 3) + 1 %> relative aspect-[4/3] rounded-3xl overflow-hidden shadow-card hover:shadow-2xl group cursor-pointer transition-all duration-300 hover:-translate-y-2">
+                <img src="<%= asset(image.image) %>" alt="<%= image.label %>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                <div class="absolute inset-x-0 bottom-0 bg-black/50 backdrop-blur-sm p-4">
+                    <p class="text-white text-sm font-semibold"><%= image.label %></p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    <p class="text-center text-sm text-slate-400 mt-10">Photos representative of our work — actual results may vary by property.</p>
+</section>
+
+<section class="py-16 bg-gradient-to-r from-brand-600 to-brand-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <h2 class="font-display font-extrabold text-3xl">Want results like these?</h2>
+        <a href="/contact" class="mt-8 inline-flex items-center gap-2 rounded-full bg-gold-400 hover:bg-gold-500 px-8 py-4 text-brand-950 font-bold shadow-soft transition">Book Your Clean →</a>
+    </div>
+</section>
+
+<%- include('partials/footer', { footerServices: footerServices }) %>

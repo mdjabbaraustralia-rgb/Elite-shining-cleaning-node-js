@@ -1,0 +1,8 @@
+<%- include('../partials/header', { title: 'Edit Service', pageTitle: 'Edit Service' }) %>
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-6 sm:p-8 max-w-2xl">
+        <form method="POST" action="/admin/services/<%= service.id %>" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PUT">
+            <%- include('_form', { service: service }) %>
+        </form>
+    </div>
+<%- include('../partials/footer') %>

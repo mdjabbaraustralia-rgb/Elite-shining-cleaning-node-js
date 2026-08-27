@@ -1,0 +1,51 @@
+<%- include('../partials/header', { title: 'Pricing Plans', pageTitle: 'Pricing Plans' }) %>
+    <div class="mb-6 flex justify-end">
+        <a href="/admin/pricing-plans/create" class="rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 transition">+ Add Plan</a>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden">
+        <div class="overflow-x-auto">
+        <table class="w-full text-sm min-w-[700px]">
+            <thead class="bg-slate-50 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-medium">Order</th>
+                    <th class="px-6 py-3 font-medium">Name</th>
+                    <th class="px-6 py-3 font-medium">Tagline</th>
+                    <th class="px-6 py-3 font-medium">Popular</th>
+                    <th class="px-6 py-3 font-medium">Status</th>
+                    <th class="px-6 py-3"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <% if (plans.length === 0) { %>
+                    <tr><td colspan="6" class="px-6 py-10 text-center text-slate-400">No pricing plans yet.</td></tr>
+                <% } %>
+                <% plans.forEach(function (plan) { %>
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-6 py-4 text-slate-400"><%= plan.sort_order %></td>
+                        <td class="px-6 py-4 font-semibold text-slate-900"><%= plan.name %></td>
+                        <td class="px-6 py-4 text-slate-500"><%= plan.tagline %></td>
+                        <td class="px-6 py-4">
+                            <% if (plan.is_popular) { %>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-gold-400/20 text-gold-500">Most Popular</span>
+                            <% } %>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full <%= plan.is_published ? 'bg-brand-100 text-brand-700' : 'bg-slate-100 text-slate-500' %>">
+                                <%= plan.is_published ? 'Published' : 'Hidden' %>
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right space-x-3 whitespace-nowrap">
+                            <a href="/admin/pricing-plans/<%= plan.id %>/edit" class="text-brand-600 hover:underline font-semibold">Edit</a>
+                            <form method="POST" action="/admin/pricing-plans/<%= plan.id %>" class="inline" onsubmit="return confirm('Delete this plan?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="text-red-500 hover:underline font-semibold">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        </div>
+    </div>
+<%- include('../partials/footer') %>

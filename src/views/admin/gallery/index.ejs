@@ -1,0 +1,33 @@
+<%- include('../partials/header', { title: 'Gallery', pageTitle: 'Gallery' }) %>
+    <div class="mb-6 flex justify-end">
+        <a href="/admin/gallery/create" class="rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 transition">+ Add Image</a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% if (images.length === 0) { %>
+            <p class="text-slate-400 col-span-full text-center py-10">No gallery images yet.</p>
+        <% } %>
+        <% images.forEach(function (image) { %>
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden">
+                <div class="aspect-[4/3] bg-slate-100">
+                    <img src="<%= asset(image.image) %>" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <p class="font-semibold text-slate-900 text-sm"><%= image.label %></p>
+                    <div class="mt-2 flex items-center justify-between">
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full <%= image.is_published ? 'bg-brand-100 text-brand-700' : 'bg-slate-100 text-slate-500' %>">
+                            <%= image.is_published ? 'Published' : 'Hidden' %>
+                        </span>
+                        <div class="space-x-3">
+                            <a href="/admin/gallery/<%= image.id %>/edit" class="text-brand-600 hover:underline font-semibold text-sm">Edit</a>
+                            <form method="POST" action="/admin/gallery/<%= image.id %>" class="inline" onsubmit="return confirm('Delete this image?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="text-red-500 hover:underline font-semibold text-sm">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+<%- include('../partials/footer') %>

@@ -1,0 +1,8 @@
+<%- include('../partials/header', { title: 'Edit Gallery Image', pageTitle: 'Edit Gallery Image' }) %>
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-6 sm:p-8 max-w-lg">
+        <form method="POST" action="/admin/gallery/<%= image.id %>" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PUT">
+            <%- include('_form', { image: image }) %>
+        </form>
+    </div>
+<%- include('../partials/footer') %>

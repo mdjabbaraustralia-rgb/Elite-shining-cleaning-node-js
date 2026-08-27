@@ -1,0 +1,57 @@
+<%- include('../partials/header', { title: 'Testimonials', pageTitle: 'Testimonials' }) %>
+    <div class="mb-6 flex justify-end">
+        <a href="/admin/testimonials/create" class="rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold px-5 py-2.5 transition">+ Add Testimonial</a>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card overflow-hidden">
+        <div class="overflow-x-auto">
+        <table class="w-full text-sm min-w-[760px]">
+            <thead class="bg-slate-50 text-slate-500 text-left">
+                <tr>
+                    <th class="px-6 py-3 font-medium">Order</th>
+                    <th class="px-6 py-3 font-medium">Photo</th>
+                    <th class="px-6 py-3 font-medium">Name</th>
+                    <th class="px-6 py-3 font-medium">Location</th>
+                    <th class="px-6 py-3 font-medium">Quote</th>
+                    <th class="px-6 py-3 font-medium">Rating</th>
+                    <th class="px-6 py-3 font-medium">Status</th>
+                    <th class="px-6 py-3"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <% if (testimonials.length === 0) { %>
+                    <tr><td colspan="8" class="px-6 py-10 text-center text-slate-400">No testimonials yet.</td></tr>
+                <% } %>
+                <% testimonials.forEach(function (t) { %>
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-6 py-4 text-slate-400"><%= t.sort_order %></td>
+                        <td class="px-6 py-4">
+                            <% if (t.photo) { %>
+                                <img src="<%= asset(t.photo) %>" class="w-9 h-9 rounded-full object-cover border border-slate-100">
+                            <% } else { %>
+                                <div class="w-9 h-9 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center text-sm"><%= t.name.substring(0,1) %></div>
+                            <% } %>
+                        </td>
+                        <td class="px-6 py-4 font-semibold text-slate-900"><%= t.name %></td>
+                        <td class="px-6 py-4 text-slate-500"><%= t.location %></td>
+                        <td class="px-6 py-4 text-slate-500 max-w-xs truncate"><%= t.quote %></td>
+                        <td class="px-6 py-4 text-gold-500"><%= '★'.repeat(t.rating) %></td>
+                        <td class="px-6 py-4">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full <%= t.is_published ? 'bg-brand-100 text-brand-700' : 'bg-slate-100 text-slate-500' %>">
+                                <%= t.is_published ? 'Published' : 'Hidden' %>
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right space-x-3 whitespace-nowrap">
+                            <a href="/admin/testimonials/<%= t.id %>/edit" class="text-brand-600 hover:underline font-semibold">Edit</a>
+                            <form method="POST" action="/admin/testimonials/<%= t.id %>" class="inline" onsubmit="return confirm('Delete this testimonial?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="text-red-500 hover:underline font-semibold">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        </div>
+    </div>
+<%- include('../partials/footer') %>

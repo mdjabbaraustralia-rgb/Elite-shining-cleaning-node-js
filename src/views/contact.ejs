@@ -1,0 +1,64 @@
+<%- include('partials/header', { title: 'Contact Us — Elite Shining Cleaning Australia' }) %>
+
+<section class="bg-gradient-to-br from-brand-800 to-brand-950 text-white py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm font-medium">Get In Touch</span>
+        <h1 class="mt-5 font-display font-extrabold text-4xl sm:text-5xl">Let's Get Your Free Quote</h1>
+        <p class="mt-5 text-brand-100 max-w-2xl mx-auto">Fill in the form below or give us a call — we typically respond within 1 business hour.</p>
+    </div>
+</section>
+
+<section class="py-24 bg-slate-50 -mt-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-5 gap-12">
+        <div class="reveal lg:col-span-3">
+            <%- include('partials/booking-form', { compact: false }) %>
+        </div>
+
+        <div class="reveal reveal-2 lg:col-span-2 space-y-6">
+            <div class="hover-lift bg-white rounded-3xl shadow-card hover:shadow-soft border border-slate-100 p-8 transition-shadow duration-300">
+                <h3 class="font-display font-bold text-lg text-slate-900 mb-5">Contact Details</h3>
+                <ul class="space-y-4 text-sm text-slate-600">
+                    <li class="flex items-start gap-3">📞 <a href="tel:<%= setting('phone', '1300 123 456').replace(/\s+/g, '') %>" class="hover:text-brand-600"><%= setting('phone', '1300 123 456') %></a></li>
+                    <li class="flex items-start gap-3">✉️ <a href="mailto:<%= setting('email', 'hello@eliteshiningcleaning.com.au') %>" class="hover:text-brand-600"><%= setting('email', 'hello@eliteshiningcleaning.com.au') %></a></li>
+                    <li class="flex items-start gap-3">📍 <%= setting('address', 'Level 2, 88 Hunter St, Newcastle NSW 2300') %></li>
+                    <li class="flex items-start gap-3">🕐 <%= setting('business_hours', 'Mon–Sun: 7:00am – 8:00pm') %></li>
+                </ul>
+            </div>
+
+            <div class="hover-lift rounded-3xl bg-gradient-to-br from-brand-600 to-brand-900 text-white p-8 shadow-soft hover:shadow-2xl transition-shadow duration-300">
+                <h3 class="font-display font-bold text-lg mb-3">Prefer to call?</h3>
+                <p class="text-sm text-brand-100 mb-5">Speak directly with our booking team — available 7 days a week.</p>
+                <a href="tel:<%= setting('phone', '1300 123 456').replace(/\s+/g, '') %>" class="btn-glow inline-flex items-center gap-2 rounded-full bg-gold-400 hover:bg-gold-500 px-6 py-3 text-brand-950 font-bold hover:-translate-y-0.5 hover:shadow-lg transition-all">📞 Call <%= setting('phone', '1300 123 456') %></a>
+            </div>
+
+            <div class="hover-lift bg-white rounded-3xl shadow-card hover:shadow-soft border border-slate-100 p-8 transition-shadow duration-300">
+                <h3 class="font-display font-bold text-lg text-slate-900 mb-3">Service Areas</h3>
+                <p class="text-sm text-slate-500 mb-4">Newcastle &amp; the Hunter Region — within a 50km radius</p>
+                <div class="flex flex-wrap gap-2">
+                    <% ['Newcastle','Lake Macquarie','Maitland','Port Stephens','Cessnock','Singleton'].forEach(function (city) { %>
+                        <span class="text-xs font-medium bg-brand-50 text-brand-700 px-3 py-1.5 rounded-full hover:bg-brand-600 hover:text-white transition-colors cursor-default"><%= city %></span>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="reveal max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        <div class="rounded-3xl overflow-hidden shadow-card border border-slate-100 hover-lift">
+            <iframe
+                class="map-dark"
+                src="https://www.google.com/maps?q=Newcastle,NSW,Australia&z=10&output=embed"
+                width="100%"
+                height="420"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Elite Shining Cleaning service area map — Newcastle & the Hunter Region">
+            </iframe>
+        </div>
+        <p class="text-center text-sm text-slate-400 mt-4">We proudly service Newcastle and the greater Hunter Region within a 50km radius.</p>
+    </div>
+</section>
+
+<%- include('partials/footer', { footerServices: footerServices }) %>

@@ -1,0 +1,51 @@
+<%- include('partials/header', { title: 'Privacy Policy — Elite Shining Cleaning Australia' }) %>
+
+<section class="bg-gradient-to-br from-brand-800 to-brand-950 text-white py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm font-medium">Legal</span>
+        <h1 class="mt-5 font-display font-extrabold text-4xl sm:text-5xl">Privacy Policy</h1>
+        <p class="mt-4 text-brand-100">Last updated: <%= new Date().toLocaleDateString('en-AU', { day: '2-digit', month: 'long', year: 'numeric' }) %></p>
+    </div>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-slate">
+        <div class="space-y-10 text-slate-600 leading-relaxed">
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">1. Introduction</h2>
+                <p><%= setting('business_name', 'Elite Shining Cleaning') %> ("we", "us", "our") respects your privacy and is committed to protecting the personal information you share with us. This policy explains what information we collect, how we use it, and your rights regarding that information, in line with the Australian Privacy Principles under the Privacy Act 1988 (Cth).</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">2. Information We Collect</h2>
+                <p>When you request a quote, make a booking, or contact us, we may collect your name, phone number, email address, property address/suburb, and any details you provide about the service you need. We do not collect payment information through this website.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">3. How We Use Your Information</h2>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>To respond to quote requests and provide the cleaning services you book</li>
+                    <li>To communicate with you about appointments, changes, or follow-ups</li>
+                    <li>To improve our services and customer experience</li>
+                    <li>To meet legal and regulatory obligations</li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">4. Sharing Your Information</h2>
+                <p>We do not sell your personal information. We may share your details with cleaning staff assigned to your job, and with trusted service providers (such as our booking and hosting systems) strictly to deliver our services to you.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">5. Data Security</h2>
+                <p>We take reasonable steps to protect your personal information from misuse, loss, and unauthorised access, including secure storage of booking data.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">6. Your Rights</h2>
+                <p>You may request access to, correction of, or deletion of your personal information at any time by contacting us using the details below.</p>
+            </div>
+            <div>
+                <h2 class="font-display font-bold text-xl text-slate-900 mb-3">7. Contact Us</h2>
+                <p>For any privacy-related questions, please contact us at <a href="mailto:<%= setting('email', 'hello@eliteshiningcleaning.com.au') %>" class="text-brand-600 font-semibold hover:underline"><%= setting('email', 'hello@eliteshiningcleaning.com.au') %></a> or call <%= setting('phone', '1300 123 456') %>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer', { footerServices: footerServices }) %>

@@ -1,0 +1,219 @@
+<%- include('partials/header', { title: 'Elite Shining Cleaning — Premium Home & Office Cleaning Across Australia' }) %>
+
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-800 via-brand-700 to-brand-950 text-white">
+    <img src="<%= setting('banner_image') || asset('images/hero-cleaning.jpg') %>" alt="" class="absolute inset-0 w-full h-full object-cover" fetchpriority="high">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-800/90 via-brand-700/80 to-brand-950/90"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-900/70 via-brand-900/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-hero-grid [background-size:22px_22px] opacity-20"></div>
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-400/30 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-32 -left-20 w-96 h-96 bg-gold-400/20 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm font-medium text-brand-100">
+                <span>⭐</span><span>Rated 4.9/5 by 2,300+ Australian homes</span>
+            </span>
+            <h1 class="mt-6 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.25]">
+                <% heroHeadlines.forEach(function (line) { %>
+                    <span class="block mb-1 sm:mb-2 last:mb-0">
+                        <% line.words.forEach(function (word) { %>
+                            <span class="relative inline-block" style="color: <%= word.color || '#ffffff' %>"><%= word.text %>
+                                <% if (word.underline) { %>
+                                    <svg class="absolute left-0 -bottom-2 w-full" height="10" viewBox="0 0 200 10" preserveAspectRatio="none"><path d="M0,5 Q50,0 100,5 T200,5" stroke="<%= word.color || '#eab030' %>" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+                                <% } %>
+                            </span>
+                        <% }) %>
+                    </span>
+                <% }) %>
+            </h1>
+            <p class="mt-6 text-lg text-brand-100/90 max-w-xl">
+                <%= setting('hero_subtitle', 'Premium residential & commercial cleaning across Newcastle and the Hunter Region — within a 50km radius. Fully insured, background-checked cleaners with a 100% satisfaction guarantee.') %>
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+                <a href="/contact" class="btn-glow inline-flex items-center gap-2 rounded-full bg-gold-400 hover:bg-gold-500 px-7 py-3.5 text-brand-950 font-bold shadow-soft hover:-translate-y-0.5 hover:shadow-xl transition-all">
+                    Get Free Quote →
+                </a>
+                <a href="/services" class="inline-flex items-center gap-2 rounded-full border border-white/30 hover:bg-white/10 hover:border-white/60 px-7 py-3.5 font-semibold transition">
+                    Explore Services
+                </a>
+            </div>
+            <div class="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-brand-100/90">
+                <span class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12.75 11.25 15 15 9.75M12 3c2.5 2 5 2.5 7.5 2.5v6.75c0 4.5-3.2 7-7.5 8.75-4.3-1.75-7.5-4.25-7.5-8.75V5.5C7 5.5 9.5 5 12 3Z" /></svg>
+                    Fully Insured
+                </span>
+                <span class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="m4.5 12.75 6 6 9-13.5" /></svg>
+                    Police-Checked Staff
+                </span>
+                <span class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 21c-3.5-2-8-5.5-8-11a8 8 0 0 1 16 0c0 5.5-4.5 9-8 11Z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 17.5V10m0 0c1.5-2.5 4-3.5 6-3.5-0.5 2.5-2 5-6 5Zm0 0C10.5 7.5 8 6.5 6 6.5 6.5 9 8 11.5 12 10Z" /></svg>
+                    Eco-Friendly Products
+                </span>
+                <span class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-gold-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M16.5 9.4V6a4.5 4.5 0 1 0-9 0v3.4M4.5 9.4h15l-.9 10.1a1.5 1.5 0 0 1-1.5 1.35H6.9a1.5 1.5 0 0 1-1.5-1.35L4.5 9.4Z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="m9.5 14.5 2 2 3.5-3.5" /></svg>
+                    Bond-Back Guarantee
+                </span>
+            </div>
+        </div>
+
+        <div class="reveal reveal-2 lg:justify-self-end w-full max-w-md">
+            <%- include('partials/booking-form', { compact: false }) %>
+        </div>
+    </div>
+</section>
+
+<section class="relative bg-gradient-to-b from-brand-50/60 to-white py-14 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+        <% [['12k+','Cleans Completed'],['4.9★','Average Rating'],['50km','Service Radius'],['100%','Satisfaction Guaranteed']].forEach(function (pair, i) { %>
+            <div class="reveal reveal-<%= i + 1 %> hover-lift group relative bg-white rounded-2xl border border-slate-100 shadow-card hover:shadow-soft hover:border-brand-200 px-4 py-6 sm:py-8 text-center overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold-400 to-gold-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></div>
+                <p class="count-up text-2xl sm:text-3xl font-display font-extrabold text-brand-700"><%= pair[0] %></p>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1"><%= pair[1] %></p>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+<section class="relative py-24 bg-slate-50 overflow-hidden">
+    <div class="absolute top-0 right-0 w-72 h-72 bg-brand-100 rounded-full blur-3xl opacity-60 -translate-y-1/2 translate-x-1/3"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal text-center max-w-2xl mx-auto mb-16">
+            <span class="text-brand-600 font-semibold tracking-wide uppercase text-sm">Our Services</span>
+            <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl text-slate-900">Everything your space needs to shine</h2>
+            <p class="mt-4 text-slate-500">From a quick weekly refresh to a full end-of-lease clean, our vetted professionals handle it all with premium care.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <% services.forEach(function (service, i) { %>
+                <div class="reveal reveal-<%= (i % 4) + 1 %> group bg-white rounded-3xl p-8 shadow-card hover:shadow-soft hover:-translate-y-2 transition-all duration-300 border border-slate-100 hover:border-brand-200">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:from-brand-500 group-hover:to-brand-700 transition-all duration-300"><%= service.icon %></div>
+                    <h3 class="mt-5 font-display font-bold text-lg text-slate-900"><%= service.title %></h3>
+                    <p class="mt-2 text-sm text-slate-500 leading-relaxed"><%= service.short_description %></p>
+                    <a href="/services" class="mt-4 inline-flex items-center gap-1 text-brand-600 font-semibold text-sm group-hover:gap-2 transition-all">Learn more →</a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal">
+            <span class="text-brand-600 font-semibold tracking-wide uppercase text-sm">How It Works</span>
+            <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl text-slate-900">Booking a sparkling clean takes 60 seconds</h2>
+            <div class="mt-10 space-y-8">
+                <% [['1','Request a Free Quote','Fill in the form with your suburb, property size and service — get an instant estimate.'],
+                    ['2','Pick a Time That Suits You','Choose a one-off clean or a recurring plan that fits your lifestyle.'],
+                    ['3','Relax While We Sparkle','Our insured, background-checked cleaners arrive on time and get to work.']].forEach(function (s) { %>
+                    <div class="flex gap-5 group">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-white font-display font-bold flex items-center justify-center shadow-soft group-hover:scale-110 group-hover:shadow-lg transition-all duration-300"><%= s[0] %></div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-slate-900"><%= s[1] %></h3>
+                            <p class="mt-1 text-sm text-slate-500"><%= s[2] %></p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <div class="reveal reveal-2 relative">
+            <div class="rounded-[2.5rem] bg-gradient-to-br from-brand-600 to-brand-900 p-10 pb-16 sm:pb-24 text-white shadow-soft hover:shadow-2xl transition-shadow duration-500">
+                <h3 class="font-display font-bold text-2xl mb-6">Our Promise to You</h3>
+                <ul class="space-y-4 text-sm text-brand-50">
+                    <% ['Fully insured & police-checked cleaning teams',
+                        "100% satisfaction — we re-clean free if you're not happy",
+                        'Eco-friendly, family & pet-safe products',
+                        'Transparent flat-rate pricing, no hidden fees',
+                        'Flexible scheduling, 7 days a week'].forEach(function (point) { %>
+                        <li class="flex items-start gap-3">
+                            <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-gold-400 text-brand-950 flex items-center justify-center text-xs font-bold">✓</span>
+                            <%= point %>
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div class="absolute -bottom-6 -left-6 hidden sm:block bg-white rounded-2xl shadow-card p-5 w-56 hover-lift">
+                <p class="text-xs text-slate-400">Bond Back Guarantee</p>
+                <p class="font-display font-extrabold text-brand-700 text-xl">100%</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal text-center max-w-2xl mx-auto mb-12">
+            <span class="text-brand-600 font-semibold tracking-wide uppercase text-sm">Service Area</span>
+            <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl text-slate-900">Proudly serving Newcastle &amp; the Hunter Region</h2>
+            <p class="mt-4 text-slate-500">We cover Newcastle and surrounding suburbs within a 50km radius — including Lake Macquarie, Maitland, Port Stephens and Cessnock.</p>
+        </div>
+        <div class="reveal reveal-2 relative rounded-3xl overflow-hidden shadow-card border border-slate-100 hover-lift aspect-[21/9] sm:aspect-[21/8]">
+            <img src="<%= setting('service_area_image') || asset('images/service-area-clean.jpg') %>" alt="Professional cleaner at work" class="absolute inset-0 w-full h-full object-cover object-top animate-kenburns" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-950/80 via-brand-900/40 to-transparent"></div>
+            <span class="absolute top-[18%] left-[12%] text-4xl opacity-80 animate-float-slow">✨</span>
+            <span class="absolute bottom-[22%] left-[22%] text-3xl opacity-70 animate-float-slow" style="animation-delay:1s">💧</span>
+            <span class="absolute top-[30%] left-[30%] text-2xl opacity-60 animate-float-slow" style="animation-delay:2s">🧼</span>
+            <div class="absolute inset-y-0 left-0 flex items-center px-8 sm:px-14 max-w-md">
+                <div class="text-white">
+                    <p class="font-display font-extrabold text-2xl sm:text-3xl leading-tight">Real cleans.<br>Real results.</p>
+                    <p class="mt-3 text-sm text-brand-100">Every visit, our team brings the same care and attention to detail — spotless, every time.</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 mt-6">
+            <% ['Newcastle','Lake Macquarie','Maitland','Port Stephens','Cessnock','Singleton'].forEach(function (city) { %>
+                <span class="text-xs font-medium bg-brand-50 text-brand-700 px-3 py-1.5 rounded-full"><%= city %></span>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-slate-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal text-center max-w-2xl mx-auto mb-16">
+            <span class="text-brand-600 font-semibold tracking-wide uppercase text-sm">Testimonials</span>
+            <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl text-slate-900">Loved by homes and businesses across the Hunter Region</h2>
+            <a href="/testimonials" class="mt-4 inline-flex items-center gap-1 text-brand-600 font-semibold text-sm hover:gap-2 transition-all">View all reviews →</a>
+        </div>
+    </div>
+
+    <div class="reveal relative">
+        <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-50 to-transparent z-10"></div>
+        <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-50 to-transparent z-10"></div>
+        <div class="flex gap-8 w-max animate-marquee hover:[animation-play-state:paused]">
+            <% testimonials.concat(testimonials).forEach(function (t) { %>
+                <div class="relative hover-lift w-80 sm:w-96 flex-shrink-0 bg-white rounded-3xl p-8 shadow-card border border-slate-100 hover:shadow-soft transition-shadow duration-300">
+                    <span class="absolute top-4 right-6 text-6xl font-display text-brand-50 select-none leading-none">”</span>
+                    <div class="relative text-gold-500 mb-4"><%= '★'.repeat(t.rating) %></div>
+                    <p class="relative text-slate-600 text-sm leading-relaxed">“<%= t.quote %>”</p>
+                    <div class="relative mt-6 flex items-center gap-3">
+                        <% if (t.photo) { %>
+                            <img src="<%= asset(t.photo) %>" alt="<%= t.name %>" class="w-10 h-10 rounded-full object-cover flex-shrink-0" loading="lazy">
+                        <% } else { %>
+                            <div class="w-10 h-10 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center flex-shrink-0"><%= t.name.substring(0,1) %></div>
+                        <% } %>
+                        <div>
+                            <p class="font-semibold text-slate-900 text-sm"><%= t.name %></p>
+                            <p class="text-xs text-slate-400"><%= t.location %></p>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+<section class="relative py-20 bg-gradient-to-r from-brand-600 to-brand-800 overflow-hidden">
+    <div class="absolute inset-0 bg-hero-grid [background-size:22px_22px] opacity-10"></div>
+    <div class="absolute -top-16 -right-16 w-72 h-72 bg-gold-400/10 rounded-full blur-3xl"></div>
+    <div class="reveal relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <h2 class="font-display font-extrabold text-3xl sm:text-4xl">Ready for a spotless space?</h2>
+        <p class="mt-4 text-brand-100">Get an instant, no-obligation quote in under a minute.</p>
+        <a href="/contact" class="btn-glow mt-8 inline-flex items-center gap-2 rounded-full bg-gold-400 hover:bg-gold-500 px-8 py-4 text-brand-950 font-bold shadow-soft hover:-translate-y-0.5 hover:shadow-xl transition-all">
+            Get Your Free Quote →
+        </a>
+    </div>
+</section>
+
+<%- include('partials/footer', { footerServices: footerServices }) %>

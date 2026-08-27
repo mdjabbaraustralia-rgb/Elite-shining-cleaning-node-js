@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'Admin' %> — Elite Shining Cleaning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<%= asset('css/app.css') %>?v=<%= assetVersion %>">
+    <script defer src="<%= asset('js/alpine.min.js') %>?v=<%= assetVersion %>"></script>
+    <style>[x-cloak]{display:none!important;}</style>
+</head>
+<body class="font-sans bg-slate-50 text-slate-700 antialiased" x-data="{ sidebarOpen: false }">
+    <div class="flex min-h-screen">
+        <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false" class="fixed inset-0 bg-black/50 z-30 md:hidden"></div>
+
+        <aside
+            class="fixed inset-y-0 left-0 z-40 w-64 flex-shrink-0 bg-brand-950 text-white flex flex-col transform transition-transform duration-300 md:static md:translate-x-0"
+            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+            <div class="p-5 border-b border-white/10 flex items-center justify-between">
+                <a href="/admin" class="flex items-center gap-2">
+                    <span class="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-brand-400 to-brand-700 font-display font-bold">E</span>
+                    <span class="font-display font-bold">Admin Panel</span>
+                </a>
+                <button @click="sidebarOpen = false" class="md:hidden text-brand-300 hover:text-white p-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <nav class="flex-1 p-4 space-y-1 text-sm">
+                <a href="/admin" class="block px-4 py-2.5 rounded-lg transition <%= currentPath === '/admin' ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Dashboard</a>
+                <a href="/admin/bookings" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/bookings') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Quote Requests</a>
+                <a href="/admin/quotations" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/quotations') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Quotations</a>
+                <a href="/admin/services" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/services') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Services</a>
+                <a href="/admin/pricing-plans" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/pricing-plans') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Pricing Plans</a>
+                <a href="/admin/gallery" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/gallery') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Gallery</a>
+                <a href="/admin/blog" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/blog') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Blog</a>
+                <a href="/admin/testimonials" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/testimonials') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Testimonials</a>
+                <a href="/admin/faqs" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/faqs') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">FAQs</a>
+                <a href="/admin/settings" class="block px-4 py-2.5 rounded-lg transition <%= currentPath.startsWith('/admin/settings') ? 'bg-brand-600 text-white' : 'text-brand-200 hover:bg-white/5' %>">Site Settings</a>
+            </nav>
+            <div class="p-4 border-t border-white/10">
+                <a href="/" target="_blank" class="block px-4 py-2 text-xs text-brand-300 hover:text-white transition">View Live Site ↗</a>
+                <form method="POST" action="/admin/logout">
+                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-brand-200 hover:text-white transition">Log Out</button>
+                </form>
+            </div>
+        </aside>
+
+        <main class="flex-1 min-w-0">
+            <header class="bg-white border-b border-slate-200 px-4 sm:px-8 py-5 flex items-center gap-3">
+                <button @click="sidebarOpen = true" class="md:hidden text-slate-500 hover:text-slate-900 p-1 -ml-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+                <h1 class="font-display font-bold text-xl text-slate-900 truncate"><%= typeof pageTitle !== 'undefined' ? pageTitle : 'Dashboard' %></h1>
+            </header>
+            <div class="p-4 sm:p-8">
+                <% if (success) { %>
+                    <div class="mb-6 rounded-xl bg-brand-50 border border-brand-200 text-brand-800 px-4 py-3 text-sm font-medium">
+                        ✅ <%= success %>
+                    </div>
+                <% } %>
+                <% if (errors._general) { %>
+                    <div class="mb-6 rounded-xl bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm font-medium">
+                        ⚠️ <%= errors._general %>
+                    </div>
+                <% } %>

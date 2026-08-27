@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'Elite Shining Cleaning — Premium Cleaning Services Australia' %></title>
+    <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Trusted, insured and eco-friendly cleaning services across Australia. Book a free quote for house cleaning, end of lease, deep cleaning & office cleaning today.' %>">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= asset('favicon-32x32.png') %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= asset('favicon-16x16.png') %>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= asset('apple-touch-icon.png') %>">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<%= setting('business_name', 'Elite Shining Cleaning') %>">
+    <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : 'Elite Shining Cleaning — Premium Cleaning Services Australia' %>">
+    <meta property="og:description" content="<%= typeof description !== 'undefined' ? description : 'Trusted, insured and eco-friendly cleaning services across Australia. Book a free quote for house cleaning, end of lease, deep cleaning & office cleaning today.' %>">
+    <meta property="og:image" content="<%= setting('banner_image') || asset('images/hero-cleaning.jpg') %>">
+    <meta property="og:url" content="<%= fullUrl %>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= typeof title !== 'undefined' ? title : 'Elite Shining Cleaning — Premium Cleaning Services Australia' %>">
+    <meta name="twitter:description" content="<%= typeof description !== 'undefined' ? description : 'Trusted, insured and eco-friendly cleaning services across Australia. Book a free quote for house cleaning, end of lease, deep cleaning & office cleaning today.' %>">
+    <meta name="twitter:image" content="<%= setting('banner_image') || asset('images/hero-cleaning.jpg') %>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="<%= asset('css/app.css') %>?v=<%= assetVersion %>">
+    <script defer src="<%= asset('js/alpine.min.js') %>?v=<%= assetVersion %>"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        .glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(14px); }
+        .clip-wave { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+
+        :root {
+            --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-14px) rotate(3deg); }
+        }
+        .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(32px) scale(0.97); filter: blur(4px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        .reveal { opacity: 0; }
+        .reveal.is-visible { animation: fade-in-up 0.9s var(--ease-premium) forwards; }
+        .reveal-1.is-visible { animation-delay: 0.08s; }
+        .reveal-2.is-visible { animation-delay: 0.16s; }
+        .reveal-3.is-visible { animation-delay: 0.24s; }
+        .reveal-4.is-visible { animation-delay: 0.32s; }
+        .reveal-5.is-visible { animation-delay: 0.4s; }
+        .reveal-6.is-visible { animation-delay: 0.48s; }
+
+        .hover-lift { transition: transform 0.45s var(--ease-premium), box-shadow 0.45s var(--ease-premium); }
+        .hover-lift:hover { transform: translateY(-8px); }
+
+        a, button { transition-timing-function: var(--ease-premium); }
+        a:active, button:active { transform: scale(0.97); }
+
+        .btn-glow { position: relative; overflow: hidden; transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-premium); }
+        .btn-glow::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+            transform: translateX(-120%) skewX(-15deg);
+            transition: transform 0.8s var(--ease-premium);
+        }
+        .btn-glow:hover::after { transform: translateX(120%) skewX(-15deg); }
+        .btn-glow:active { transform: scale(0.96); }
+
+        @keyframes pop-in {
+            0% { opacity: 0; transform: scale(0.85); }
+            60% { opacity: 1; transform: scale(1.03); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .reveal-pop { opacity: 0; }
+        .reveal-pop.is-visible { animation: pop-in 0.6s var(--ease-spring) forwards; }
+
+        @keyframes underline-grow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .map-dark {
+            filter: invert(92%) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.9);
+            background: #0d1b2a;
+        }
+
+        @keyframes kenburns {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.12) translate(-1.5%, -1%); }
+            100% { transform: scale(1) translate(0, 0); }
+        }
+        .animate-kenburns { animation: kenburns 18s ease-in-out infinite; }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .animate-marquee { animation: marquee 32s linear infinite; }
+    </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-white">
+
+    <div class="bg-brand-950 text-brand-50 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2">
+            <p class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
+                <%= setting('announcement_text', 'Servicing Newcastle & the Hunter Region (50km radius) — 7 days a week') %>
+            </p>
+            <div class="flex items-center gap-4">
+                <a href="tel:<%= setting('phone', '1300 123 456').replace(/\s+/g, '') %>" class="font-semibold hover:text-gold-400 transition">📞 <%= setting('phone', '1300 123 456') %></a>
+                <a href="mailto:<%= setting('email', 'hello@eliteshiningcleaning.com.au') %>" class="hidden sm:inline hover:text-gold-400 transition"><%= setting('email', 'hello@eliteshiningcleaning.com.au') %></a>
+            </div>
+        </div>
+    </div>
+
+    <header x-data="{ open: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 20" :class="scrolled ? 'shadow-lg' : 'shadow-sm'" class="sticky top-0 z-50 bg-white/90 backdrop-blur transition-shadow duration-300">
+        <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-300 to-transparent"></div>
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between transition-all duration-300" :class="scrolled ? 'h-16 py-2' : 'h-18 py-3'">
+                <a href="/" class="flex items-center group">
+                    <img src="<%= setting('site_logo') || asset('images/logo.png') %>" alt="Elite Shining Cleaning" class="h-14 w-auto group-hover:scale-105 transition">
+                </a>
+
+                <div class="hidden lg:flex items-center gap-1 font-medium text-slate-600">
+                    <a href="/" class="px-4 py-2 rounded-full transition-colors duration-300 <%= currentPath === '/' ? 'bg-brand-50 text-brand-600' : 'hover:bg-slate-50 hover:text-brand-600' %>">Home</a>
+                    <a href="/services" class="px-4 py-2 rounded-full transition-colors duration-300 <%= currentPath === '/services' ? 'bg-brand-50 text-brand-600' : 'hover:bg-slate-50 hover:text-brand-600' %>">Services</a>
+                    <a href="/pricing" class="px-4 py-2 rounded-full transition-colors duration-300 <%= currentPath === '/pricing' ? 'bg-brand-50 text-brand-600' : 'hover:bg-slate-50 hover:text-brand-600' %>">Pricing</a>
+                    <a href="/gallery" class="px-4 py-2 rounded-full transition-colors duration-300 <%= currentPath === '/gallery' ? 'bg-brand-50 text-brand-600' : 'hover:bg-slate-50 hover:text-brand-600' %>">Gallery</a>
+                    <a href="/about" class="px-4 py-2 rounded-full transition-colors duration-300 <%= currentPath === '/about' ? 'bg-brand-50 text-brand-600' : 'hover:bg-slate-50 hover:text-brand-600' %>">About</a>
+                    <a href="/faq" class="px-4 py-2 rounded-full transition-colors duration-300 <%= currentPath === '/faq' ? 'bg-brand-50 text-brand-600' : 'hover:bg-slate-50 hover:text-brand-600' %>">FAQ</a>
+                    <a href="/contact" class="px-4 py-2 rounded-full transition-colors duration-300 <%= currentPath === '/contact' ? 'bg-brand-50 text-brand-600' : 'hover:bg-slate-50 hover:text-brand-600' %>">Contact</a>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="/contact" class="btn-glow inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-700 px-5 py-2.5 text-white font-semibold shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                        Get Free Quote
+                    </a>
+                </div>
+
+                <button @click="open = !open" class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100">
+                    <svg x-show="!open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    <svg x-show="open" x-cloak class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <div x-show="open" x-cloak x-transition class="lg:hidden pb-4 space-y-1 font-medium">
+                <a href="/" class="block px-3 py-2 rounded-lg hover:bg-brand-50">Home</a>
+                <a href="/services" class="block px-3 py-2 rounded-lg hover:bg-brand-50">Services</a>
+                <a href="/pricing" class="block px-3 py-2 rounded-lg hover:bg-brand-50">Pricing</a>
+                <a href="/gallery" class="block px-3 py-2 rounded-lg hover:bg-brand-50">Gallery</a>
+                <a href="/about" class="block px-3 py-2 rounded-lg hover:bg-brand-50">About</a>
+                <a href="/faq" class="block px-3 py-2 rounded-lg hover:bg-brand-50">FAQ</a>
+                <a href="/contact" class="block px-3 py-2 rounded-lg hover:bg-brand-50">Contact</a>
+                <a href="/contact" class="block mt-2 text-center rounded-full bg-brand-600 px-5 py-2.5 text-white font-semibold">Get Free Quote</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>

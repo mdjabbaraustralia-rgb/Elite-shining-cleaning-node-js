@@ -1,0 +1,137 @@
+    </main>
+
+    <footer class="relative bg-brand-950 text-brand-100 overflow-hidden">
+        <div class="absolute inset-0 bg-cleaning-pattern [background-size:160px_160px] opacity-5"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div>
+                <a href="/" class="inline-flex items-center mb-4">
+                    <img src="<%= setting('site_logo_white') || asset('images/logo-white.png') %>" alt="Elite Shining Cleaning" class="h-10 w-auto">
+                </a>
+                <p class="text-sm text-brand-200 leading-relaxed"><%= setting('footer_tagline', 'Premium residential & commercial cleaning across Australia. Insured, police-checked, and 100% satisfaction guaranteed.') %></p>
+                <div class="flex gap-3 mt-5">
+                    <% if (setting('facebook_url') && setting('facebook_enabled', '1') !== '0') { %>
+                        <a href="<%= setting('facebook_url') %>" target="_blank" rel="noopener" aria-label="Facebook" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-brand-500 transition">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z"/></svg>
+                        </a>
+                    <% } %>
+                    <% if (setting('instagram_url') && setting('instagram_enabled', '1') !== '0') { %>
+                        <a href="<%= setting('instagram_url') %>" target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-brand-500 transition">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.5.5.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53C6.09.28 6.82.11 7.88.06 8.94.01 9.28 0 12 0Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4Zm5.2-8.4a1.17 1.17 0 1 0 0-2.34 1.17 1.17 0 0 0 0 2.34Z"/></svg>
+                        </a>
+                    <% } %>
+                    <% if (setting('linkedin_url') && setting('linkedin_enabled', '1') !== '0') { %>
+                        <a href="<%= setting('linkedin_url') %>" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-brand-500 transition">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.15 1.45-2.15 2.94v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.44v6.3ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+                        </a>
+                    <% } %>
+                    <% if (setting('youtube_url') && setting('youtube_enabled', '1') !== '0') { %>
+                        <a href="<%= setting('youtube_url') %>" target="_blank" rel="noopener" aria-label="YouTube" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-brand-500 transition">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.5V8.5l6.3 3.5-6.3 3.5Z"/></svg>
+                        </a>
+                    <% } %>
+                    <% if (setting('tiktok_url') && setting('tiktok_enabled', '1') !== '0') { %>
+                        <a href="<%= setting('tiktok_url') %>" target="_blank" rel="noopener" aria-label="TikTok" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-brand-500 transition">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M16.6 2h-3.3v14.1a3 3 0 1 1-2.4-2.9V9.7a6.1 6.1 0 1 0 5.7 6.1V8.4a8.2 8.2 0 0 0 4.8 1.5V6.7a4.8 4.8 0 0 1-4.8-4.7Z"/></svg>
+                        </a>
+                    <% } %>
+                    <% if (setting('twitter_url') && setting('twitter_enabled', '1') !== '0') { %>
+                        <a href="<%= setting('twitter_url') %>" target="_blank" rel="noopener" aria-label="X (Twitter)" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-brand-500 transition">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.9 2h3.2l-7 8 8.2 12h-6.4l-5-6.5-5.7 6.5H2l7.5-8.6L1.6 2H8.2l4.5 6 6.2-6Zm-1.1 18.2h1.8L7.2 3.7H5.3l12.5 16.5Z"/></svg>
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-display font-bold text-white mb-4">Services</h4>
+                <ul class="space-y-2 text-sm text-brand-200">
+                    <% if (footerServices && footerServices.length) { %>
+                        <% footerServices.forEach(function (t) { %>
+                            <li><a href="/services" class="hover:text-white transition"><%= t %></a></li>
+                        <% }) %>
+                    <% } else { %>
+                        <li><a href="/services" class="hover:text-white transition">View All Services</a></li>
+                    <% } %>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-display font-bold text-white mb-4">Service Areas</h4>
+                <ul class="space-y-2 text-sm text-brand-200">
+                    <% (setting('footer_service_areas', "Newcastle, NSW\nLake Macquarie, NSW\nMaitland, NSW\nPort Stephens, NSW\nCessnock, NSW\n+ 50km radius").split('\n').map(function(s){return s.trim();}).filter(Boolean)).forEach(function (area) { %>
+                        <li><%= area %></li>
+                    <% }) %>
+                </ul>
+            </div>
+
+            <div class="min-w-0">
+                <h4 class="font-display font-bold text-white mb-4">Get In Touch</h4>
+                <ul class="space-y-3 text-sm text-brand-200">
+                    <li class="flex items-start gap-2 min-w-0"><span>📞</span> <a href="tel:<%= setting('phone', '1300 123 456').replace(/\s+/g, '') %>" class="hover:text-white break-words min-w-0"><%= setting('phone', '1300 123 456') %></a></li>
+                    <li class="flex items-start gap-2 min-w-0"><span>✉️</span> <a href="mailto:<%= setting('email', 'hello@eliteshiningcleaning.com.au') %>" class="hover:text-white break-all min-w-0"><%= setting('email', 'hello@eliteshiningcleaning.com.au') %></a></li>
+                    <li class="flex items-start gap-2 min-w-0"><span>📍</span> <span class="break-words min-w-0"><%= setting('address', 'Level 2, 88 Hunter St, Newcastle NSW 2300') %></span></li>
+                    <li class="flex items-start gap-2 min-w-0"><span>🕐</span> <span class="break-words min-w-0"><%= setting('business_hours', 'Mon–Sun: 7:00am – 8:00pm') %></span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs text-brand-300">
+                <a href="/testimonials" class="hover:text-white transition">Testimonials</a>
+                <a href="/blog" class="hover:text-white transition">Blog</a>
+                <a href="/privacy-policy" class="hover:text-white transition">Privacy Policy</a>
+                <a href="/terms-conditions" class="hover:text-white transition">Terms &amp; Conditions</a>
+            </div>
+        </div>
+        <div class="border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-brand-300">
+                <p>&copy; <%= new Date().getFullYear() %> <%= setting('business_name', 'Elite Shining Cleaning') %> Pty Ltd. ABN <%= setting('abn', '12 345 678 901') %>. All rights reserved.</p>
+                <p>Made with 🇦🇺 in Australia</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+            const easeOutExpo = (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+            const animateCount = (el) => {
+                const raw = el.textContent.trim();
+                const match = raw.match(/^([\d.,]+)(.*)$/);
+                if (!match) return;
+                const target = parseFloat(match[1].replace(/,/g, ''));
+                const suffix = match[2];
+                const decimals = (match[1].split('.')[1] || '').length;
+                const duration = 1400;
+                const start = performance.now();
+                const tick = (now) => {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = easeOutExpo(progress);
+                    const current = target * eased;
+                    el.textContent = (decimals ? current.toFixed(decimals) : Math.round(current).toLocaleString()) + suffix;
+                    if (progress < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            };
+            const countIo = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        animateCount(entry.target);
+                        countIo.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.count-up').forEach((el) => countIo.observe(el));
+        });
+    </script>
+</body>
+</html>

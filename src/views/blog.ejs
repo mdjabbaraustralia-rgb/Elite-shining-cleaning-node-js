@@ -1,0 +1,45 @@
+<%- include('partials/header', { title: 'Cleaning Tips & Blog — Elite Shining Cleaning Australia' }) %>
+
+<section class="bg-gradient-to-br from-brand-800 to-brand-950 text-white py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm font-medium">Blog</span>
+        <h1 class="mt-5 font-display font-extrabold text-4xl sm:text-5xl">Cleaning Tips &amp; Advice</h1>
+        <p class="mt-5 text-brand-100 max-w-2xl mx-auto">Handy guides from our cleaning professionals — straight from the Hunter Region.</p>
+    </div>
+</section>
+
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% posts.forEach(function (post, i) { %>
+                <article class="reveal reveal-<%= (i % 3) + 1 %> group bg-white rounded-3xl overflow-hidden shadow-card border border-slate-100 hover:shadow-soft hover:-translate-y-2 transition-all duration-300">
+                    <div class="relative aspect-[16/10] overflow-hidden">
+                        <img src="<%= post.image ? asset(post.image) : asset('images/hero-cleaning.jpg') %>" alt="<%= post.title %>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
+                        <% if (post.tag) { %>
+                            <span class="absolute top-4 left-4 text-xs font-semibold bg-white/90 text-brand-700 px-3 py-1 rounded-full"><%= post.tag %></span>
+                        <% } %>
+                    </div>
+                    <div class="p-6">
+                        <% if (post.published_date) { %>
+                            <p class="text-xs text-slate-400"><%= formatDate(post.published_date) %></p>
+                        <% } %>
+                        <h2 class="mt-2 font-display font-bold text-lg text-slate-900 leading-snug"><%= post.title %></h2>
+                        <p class="mt-3 text-sm text-slate-500 leading-relaxed"><%= post.excerpt %></p>
+                    </div>
+                </article>
+            <% }) %>
+        </div>
+        <p class="text-center text-sm text-slate-400 mt-12">More articles coming soon — check back regularly for fresh cleaning tips.</p>
+    </div>
+</section>
+
+<section class="py-16 bg-gradient-to-r from-brand-600 to-brand-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <h2 class="font-display font-extrabold text-3xl">Prefer to leave it to the professionals?</h2>
+        <p class="mt-3 text-brand-100">Let our vetted cleaning team take care of it for you.</p>
+        <a href="/contact" class="btn-glow mt-8 inline-flex items-center gap-2 rounded-full bg-gold-400 hover:bg-gold-500 px-8 py-4 text-brand-950 font-bold shadow-soft hover:-translate-y-0.5 hover:shadow-xl transition-all">Get Your Free Quote →</a>
+    </div>
+</section>
+
+<%- include('partials/footer', { footerServices: footerServices }) %>

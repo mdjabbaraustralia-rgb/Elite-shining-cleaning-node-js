@@ -1,0 +1,7 @@
+<%- include('../partials/header', { title: 'Add Gallery Image', pageTitle: 'Add Gallery Image' }) %>
+    <div class="bg-white rounded-2xl border border-slate-100 shadow-card p-6 sm:p-8 max-w-lg">
+        <form method="POST" action="/admin/gallery" enctype="multipart/form-data">
+            <%- include('_form', { image: null }) %>
+        </form>
+    </div>
+<%- include('../partials/footer') %>

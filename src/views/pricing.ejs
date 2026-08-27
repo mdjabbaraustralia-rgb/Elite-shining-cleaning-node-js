@@ -1,0 +1,52 @@
+<%- include('partials/header', { title: 'Pricing — Elite Shining Cleaning Australia' }) %>
+
+<section class="bg-gradient-to-br from-brand-800 to-brand-950 text-white py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm font-medium">Simple, Transparent Pricing</span>
+        <h1 class="mt-5 font-display font-extrabold text-4xl sm:text-5xl">No hidden fees. Ever.</h1>
+        <p class="mt-5 text-brand-100 max-w-2xl mx-auto">Flat-rate pricing based on property size — get an exact quote in under a minute.</p>
+    </div>
+</section>
+
+<section class="py-24 bg-slate-50 -mt-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+        <% plans.forEach(function (plan, i) { %>
+            <div class="reveal reveal-<%= i + 1 %> relative rounded-3xl p-8 border transition-all duration-300 hover:-translate-y-2 <%= plan.is_popular ? 'bg-brand-900 text-white border-brand-700 shadow-soft lg:-translate-y-4 hover:shadow-2xl' : 'bg-white text-slate-700 border-slate-100 shadow-card hover:shadow-soft hover:border-brand-200' %>">
+                <% if (plan.is_popular) { %>
+                    <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold-400 text-brand-950 text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">MOST POPULAR</span>
+                <% } %>
+                <h3 class="font-display font-bold text-xl <%= plan.is_popular ? 'text-white' : 'text-slate-900' %>"><%= plan.name %></h3>
+                <p class="text-sm <%= plan.is_popular ? 'text-brand-200' : 'text-slate-400' %> mt-1"><%= plan.tagline %></p>
+                <p class="mt-6 font-display font-extrabold text-2xl <%= plan.is_popular ? 'text-gold-400' : 'text-brand-700' %>">Custom Quote</p>
+                <ul class="mt-6 space-y-3 text-sm">
+                    <% featuresList(plan.features).forEach(function (f) { %>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full <%= plan.is_popular ? 'bg-gold-400 text-brand-950' : 'bg-brand-500 text-white' %> flex items-center justify-center text-xs font-bold">✓</span>
+                            <%= f %>
+                        </li>
+                    <% }) %>
+                </ul>
+                <a href="/contact" class="mt-8 block text-center rounded-full py-3 font-semibold transition <%= plan.is_popular ? 'bg-gold-400 hover:bg-gold-500 text-brand-950' : 'bg-brand-600 hover:bg-brand-700 text-white' %>">Get a Quote</a>
+            </div>
+        <% }) %>
+    </div>
+    <p class="text-center text-sm text-slate-400 mt-10">Pricing depends on property size, condition and location. Get an exact quote after a quick chat with our team.</p>
+</section>
+
+<section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-display font-extrabold text-3xl text-slate-900">Recurring cleans save you more</h2>
+        <p class="mt-4 text-slate-500">Sign up for a weekly or fortnightly plan and save up to 15% on every clean.</p>
+        <div class="mt-10 grid sm:grid-cols-3 gap-6">
+            <% [['Weekly','15% OFF'],['Fortnightly','10% OFF'],['Monthly','5% OFF']].forEach(function (row, i) { %>
+                <div class="reveal reveal-<%= i + 1 %> hover-lift rounded-2xl border border-slate-100 shadow-card hover:shadow-soft hover:border-brand-200 transition-all duration-300 p-6">
+                    <p class="font-display font-bold text-lg text-slate-900"><%= row[0] %></p>
+                    <p class="text-brand-600 font-extrabold text-2xl mt-2"><%= row[1] %></p>
+                </div>
+            <% }) %>
+        </div>
+        <a href="/contact" class="btn-glow mt-10 inline-flex items-center gap-2 rounded-full bg-brand-600 hover:bg-brand-700 px-8 py-4 text-white font-bold shadow-soft hover:-translate-y-0.5 hover:shadow-lg transition-all">Set Up a Recurring Plan →</a>
+    </div>
+</section>
+
+<%- include('partials/footer', { footerServices: footerServices }) %>
