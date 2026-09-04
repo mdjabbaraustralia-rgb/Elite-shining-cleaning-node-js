@@ -4,7 +4,14 @@ const crypto = require('crypto');
 const sharp = require('sharp');
 
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
-const STORAGE_DIR = path.join(PUBLIC_DIR, 'storage');
+// Allow uploaded images to live outside the deployed code directory (e.g. a
+// persistent volume on the host), so a redeploy that replaces the app's code
+// never wipes real uploaded gallery/service/logo images. Falls back to the
+// in-repo public/storage path for local development. If STORAGE_DIR is moved
+// to an external volume, copy the existing public/storage/ contents there
+// once so already-uploaded images keep working.
+const STORAGE_DIR = process.env.STORAGE_DIR || path.join(PUBLIC_DIR, 'storage');
+fs.mkdirSync(STORAGE_DIR, { recursive: true });
 
 // Resize (down only) and compress an uploaded image, then store it under
 // public/storage/<directory>/. Mirrors the Laravel ManagesUploadedFiles trait.
@@ -43,4 +50,4 @@ function deleteOldUpload(publicPath) {
   fs.unlink(full, () => {}); // best-effort, ignore errors
 }
 
-module.exports = { storeOptimizedImage, deleteOldUpload };
+module.exports = { storeOptimizedImage, deleteOldUpload, STORAGE_DIR };

@@ -5,6 +5,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 
 const settings = require('./lib/settings');
+const { STORAGE_DIR } = require('./lib/uploads');
 
 // Last-resort safety net: log and keep running instead of taking the whole
 // site down. Route-level validation/try-catch should prevent these, but this
@@ -25,6 +26,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// Served explicitly (not just via express.static(PUBLIC_DIR)) because
+// STORAGE_DIR can be pointed at a persistent volume outside PUBLIC_DIR.
+app.use('/storage', express.static(STORAGE_DIR));
 app.use(express.static(PUBLIC_DIR));
 
 app.use(session({
