@@ -37,7 +37,7 @@
             </div>
 
             <div x-data="{
-                    lines: <%- JSON.stringify(heroHeadlines) %>,
+                    lines: <%= JSON.stringify(heroHeadlines) %>,
                     addLine() { this.lines.push({ words: [{ text: '', color: '#ffffff', underline: false }] }) },
                     removeLine(i) { if (this.lines.length > 1) this.lines.splice(i, 1) },
                     addWord(i) { this.lines[i].words.push({ text: '', color: '#ffffff', underline: false }) },
